@@ -1,0 +1,6 @@
+{% extends "situmon/base.html" %}
+{% block content %}
+   <h1>{{ user.username }}</h1>
+   <p>{{ user.bio }}</p>
+   <a class="btn btn-info" href="{% url 'change' %}">Update username/bio</a>
+{% endblock content %}

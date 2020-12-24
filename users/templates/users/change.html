@@ -1,0 +1,18 @@
+{% extends 'situmon/base.html' %}
+{% block content %}
+<div class="">
+    <div class="">
+        <div class="">
+            <div class="">
+                <div class=""><h3>ユーザー情報の変更</h3></div>
+                <form class="" action="" method="POST">
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button class="" type="submit">確認</button>
+                </form>
+            </div>
+        </div>
+        <a href="{% url 'profile' %}">プロフィールに戻る</a>
+    </div>
+</div>
+{% endblock %}

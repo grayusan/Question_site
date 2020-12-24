@@ -1,0 +1,61 @@
+{% extends 'situmon/base.html' %}
+{% load static %}
+{% load markdowntext %}
+{% block content %}
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <article class="media content-section">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="#">{{ object.author }}</a>
+          <small class="text-muted">{{ object.published_date|date:"F d, Y"}}</small>
+          {% if object.author == user %}
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'situmon:post-update' object.id%}">Update</a>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'situmon:post-delete' object.id %}">Delte</a>
+          {% endif %}
+        </div>
+        <h1　class="article-title">{{ object.title }}</h1>
+        <div class="markdown-style">
+          <p class="article-content">{{ object.text | markdown_to_html }}</p>
+        </div>
+      </div>
+    </article>
+
+    <h2>コメント一覧</h2>
+    <a href="{% url 'situmon:comment' post.pk %}">コメントする</a>
+    <hr>
+    {% for comment in post.comment_set.all %}
+      <div class="media-body">
+          <a class="mr-2" href="#">{{ comment.name }}</a>
+          <small class="text-muted">{{ comment.created_at|date:"F d, Y"}}</small>
+          {% if comment.author == user.get_username %}
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'situmon:post-update' object.id%}">Update</a>
+          <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'situmon:post-delete' object.id %}">Delte</a>
+          {% endif %}
+        <h2　class="article-title">{{ comment.title }}</h2>
+        <p class="article-content">{{ comment.text | markdown_to_html }}</p>
+        <hr>
+      </div>
+
+      <a href="{% url 'situmon:reply' comment.pk %}">返信する</a><br>
+        
+        {% for reply in comment.reply_set.all %}
+          <div style="margin-left:100px;">
+              名前:{{ reply.name }}<br>
+              テキスト:{{ reply.text | markdown_to_html}}<br>       
+              <hr>
+          </div>
+        {% endfor %}
+        <hr>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-2"></div>
+  
+  <link rel="stylesheet" href="{% static  'situmon/markdown-content.css' %}">
+  <!-- highlight.js関連の読み込み -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/dracula.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+    
+{% endblock content %}

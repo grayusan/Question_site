@@ -1,0 +1,5 @@
+django
+django-markdownx
+django-crispy-forms
+django-allauth
+

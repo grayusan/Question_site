@@ -1,0 +1,19 @@
+div.markdown-style h2 {
+    font-size: 30px;
+    border-bottom: solid 1.5px #808080;
+    padding-bottom: 5px;
+    padding-top:10px;
+}
+
+div.markdown-style h3 {
+    font-size: 20px;
+    border-bottom: solid 1.5px #808080;
+    padding-bottom: 5px;
+    padding-top:5px;
+}
+div.markdown-style h1 {
+    font-size: 35px;
+    border-bottom: solid 2px #000;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
